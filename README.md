@@ -7,8 +7,21 @@ Requirements
 Necessary:
 * A relatively recent ghc (7.4 or later)
 * cabal 1.18 or later
+* Cabal packages: base, bytestring, aeson, haskell-src-exts (>= 1.14.0), haddock (`cabal install aeson haskell-src-exts haddock`)
 
 Optional, but useful:
+* [hsdev](http://hackage.haskell.org/package/hsdev) (for completion, inspection etc, `cabal install hsdev`) disabled by default because it's in beta, enable it with setting `enable_hsdev` setting to `true`.<br>Provides smart completions, and allows commands:
+  * `SublimeHaskell: Insert import for symbol` - add import for declaration
+  * `SublimeHaskell: Find declarations` - find declarations in installed packages and in projects
+  * `SublimeHaskell: Search declarations everywhere` - search declarations in hayoo too
+  * `SublimeHaskell: Clear imports` - remove unnecessary imports and maybe make import list
+  * `SublimeHaskell: Browse module` - get declarations for module
+  * `SublimeHaskell: Show symbol info` - get help for symbol, `Ctrl+K Ctrl+I`
+  * `SublimeHaskell: Go to declaration` - overrides default, `F12`
+  * `SublimeHaskell: Go to any declaration` - list declaration for all haskell sources
+  * `Ctrl+R`, `Ctrl+Shift+R` - overrides default, goto symbol and goto symbol in project
+  * `SublimeHaskell: Hayoo` - search in hayoo
+  * `SublimeHaskell: Eval` - apply haskell function to selections, for example you can select several numbers, then run this command with `* 2`, and numbers will be doubled
 * [ghc-mod](http://hackage.haskell.org/package/ghc-mod) (for import and LANGUAGE completions and type inference, `cabal install ghc-mod`)
 * [stylish-haskell](https://github.com/jaspervdj/stylish-haskell) (for code prettification, `cabal install stylish-haskell`)
 * [cabal-dev](http://hackage.haskell.org/package/cabal-dev) if you want to use it
@@ -38,7 +51,7 @@ To use cabal-dev instead of cabal, set use_cabal_dev to true (or use command "Sw
 
 Stylish-haskell can be used to stylish file or selected text.
 
-Use `Ctrl-Shift-R` to go to declaration and `Ctrl-K-I` to show symbol info with documentation. These command are also available through context menu with right-click.
+Use `F12` to go to declaration and `Ctrl-K-I` to show symbol info with documentation. These command are also available through context menu with right-click.
 
 Command 'SublimeHaskell: Browse module' is similar to ghci's browse command
 
