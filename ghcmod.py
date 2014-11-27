@@ -58,9 +58,10 @@ def run_ghcmods(cmds, msg, alter_messages_cb=None):
 
     file_dir, file_name = os.path.split(file_shown_in_view)
 
+    file_show_in_view_quoted = '"{0}"'.format(file_shown_in_view)
     ghc_mod_args = []
     for cmd in cmds:
-        ghc_mod_args.append((cmd, cmd + [file_shown_in_view]))
+        ghc_mod_args.append((cmd, cmd + [file_show_in_view_quoted]))
 
     def show_current_file_first_and_alter(msgs):
         if alter_messages_cb:
@@ -199,7 +200,8 @@ def ghcmod_info(filename, module_name, symbol_name, cabal = None):
     """
     Uses ghc-mod info filename module_name symbol_name to get symbol info
     """
-    contents = call_ghcmod_and_wait(['info', filename, module_name, symbol_name], filename = filename, cabal = cabal)
+    contents = call_ghcmod_and_wait(['info', '"{0}"'.format(filename), module_name, symbol_name]
+                                   ,filename = filename, cabal = cabal)
     # TODO: Returned symbol doesn't contain location
     # But in fact we use ghcmod_info only to retrieve type of symbol
     return parse_info(symbol_name, contents)
@@ -208,7 +210,8 @@ def ghcmod_type(filename, module_name, line, column, cabal = None):
     """
     Uses ghc-mod type to infer type
     """
-    return call_ghcmod_and_wait(['type', filename, module_name, str(line), str(column)], filename = filename, cabal = cabal)
+    return call_ghcmod_and_wait(['type', '"{0}"'.format(filename), module_name, str(line), str(column)]
+                               ,filename = filename, cabal = cabal)
 
 def ghcmod_enabled():
     return get_setting_async('enable_ghc_mod') == True

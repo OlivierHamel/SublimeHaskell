@@ -163,7 +163,7 @@ def call_and_wait_with_input(command, input_string, **popen_kwargs):
 
     # For the subprocess, extend the env PATH to include the 'add_to_PATH' setting.
     extended_env = get_extended_env()
-
+    #log('running cmd: {0}'.format(command))
     process = subprocess.Popen(
         command,
         stdout=subprocess.PIPE,
@@ -435,7 +435,7 @@ def get_ghc_opts(filename = None, add_package_db = True, cabal = None):
             ghc_opts.append('-package-db {0}'.format(package_db))
 
     if filename:
-        ghc_opts.append('-i {0}'.format(get_source_dir(filename)))
+        ghc_opts.append("-i '{0}'".format(get_source_dir(filename)))
 
     return ghc_opts
 
@@ -446,7 +446,7 @@ def get_ghc_opts_args(filename = None, add_package_db = True, cabal = None):
     opts = get_ghc_opts(filename, add_package_db, cabal)
     args = []
     for opt in opts:
-        args.extend(["-g", opt])
+        args.append('-g "{0}"'.format(opt))
     return args
 
 def call_ghcmod_and_wait(arg_list, filename=None, cabal = None):
@@ -458,7 +458,7 @@ def call_ghcmod_and_wait(arg_list, filename=None, cabal = None):
     ghc_opts_args = get_ghc_opts_args(filename, add_package_db = False, cabal = cabal)
 
     try:
-        command = attach_cabal_sandbox(['ghc-mod'] + arg_list + ghc_opts_args, cabal)
+        command = attach_cabal_sandbox(['ghc-mod'] + ghc_opts_args + arg_list, cabal)
 
         # log('running ghc-mod: {0}'.format(command))
 
