@@ -25,7 +25,7 @@ output_regex = re.compile(
     re.MULTILINE)
 
 # Extract the filename, line, column, and description from an error message:
-result_file_regex = r'^(\S*?): line (\d+), column (\d+):$'
+result_file_regex = r'^(\S.*?): line (\d+), column (\d+):$'
 
 
 # Global list of errors. Used e.g. for jumping to the next one.
